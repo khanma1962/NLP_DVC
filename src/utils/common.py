@@ -10,4 +10,9 @@ def read_yaml(path_to_yaml: str) -> dict:
 
     return content
 
+def create_directories(dirs: list):
+    for dir_path in dirs:
+        os.makedirs(dir_path, exist_ok=True)
+        logging.info(f"dirctory created as {dir_path}")
+
 
