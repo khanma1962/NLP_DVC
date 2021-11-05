@@ -5,6 +5,7 @@ import shutil
 from tqdm import tqdm
 import logging
 from src.utils.common import read_yaml, create_directories, get_df
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 logging.basicConfig(
     filename=os.path.join("logs", 'running_logs.log'), 

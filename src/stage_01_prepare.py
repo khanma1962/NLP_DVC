@@ -30,6 +30,7 @@ def main(config_path, params_path):
 
     artifacts = config["artifacts"]
     prepare_data_dir_path = os.path.join(artifacts["ARTIFACTS_DIR"], artifacts["PREPARED_DATA"])
+    print(f"prepare_data_dir_path is {prepare_data_dir_path}")
     create_directories([prepare_data_dir_path])
 
     train_data_path = os.path.join(prepare_data_dir_path, artifacts["TRAIN_DATA"])

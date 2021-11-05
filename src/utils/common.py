@@ -1,4 +1,5 @@
 
+import pandas as pd
 import os
 import logging
 import yaml
@@ -14,5 +15,19 @@ def create_directories(dirs: list):
     for dir_path in dirs:
         os.makedirs(dir_path, exist_ok=True)
         logging.info(f"dirctory created as {dir_path}")
+
+def get_df(path_to_data: str, sep: str="\t") -> pd.DataFrame:
+    df = pd.read_csv(
+        path_to_data,
+        encoding="utf-8",
+        header=None,
+        delimiter="\t",
+        names=["id", "label", "text"]
+        )
+    logging.info(f"DataFrame has been created at {path_to_data} of size {df.shape}")
+    
+    return df
+
+
 
 
