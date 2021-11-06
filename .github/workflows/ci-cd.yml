@@ -1,1 +1,38 @@
+
+# https://cml.dev/
 # add ci-cd steps here
+
+name: train_nlp_dvc
+
+on: [push]
+
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: iterative/setup-cml@v1
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.7"
+
+      - name: cml_run
+        env:
+          REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+        run: |  # | will run all the commands in sequence
+          # ML workflow commands
+          pip install --upgrade pip
+          pip3 install -r requiremnt.txt
+
+          dvc repo -v # v --> verbose
+          echo "## REPORTS" >> report.md
+          echo "## METRICS" >> report.md
+          cat score.json >> report.md
+
+          cml-send-command report.mld # CML COMMAND USE TO COMMENT ON LAST COMMAND
+
+
+
