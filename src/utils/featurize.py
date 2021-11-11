@@ -12,6 +12,7 @@ def save_matrix(df, matrix, out_path):
     result = sparse.hstack([id_matrix, label_matrix, matrix], format="csr")
 
     msg = f"output matrix {out_path} of size {result.shape} and data type {result.dtype}"
+    logging.info(msg)
     joblib.dump(result, out_path)
 
     
