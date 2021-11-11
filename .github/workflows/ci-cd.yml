@@ -25,7 +25,7 @@ jobs:
         run: |  # | will run all the commands in sequence
           # ML workflow commands
           pip install --upgrade pip
-          pip3 install -r requiremnt.txt
+          pip3 install -r requiremnts.txt
 
           dvc repo -v # v --> verbose
           echo "## REPORTS" >> report.md
