@@ -5,6 +5,7 @@ import shutil
 from tqdm import tqdm
 import logging
 from src.utils.common import read_yaml, create_directories, get_df
+from src.utils.featurize import save_matrix
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 logging.basicConfig(
@@ -32,13 +33,29 @@ def main(config_path, params_path):
     featurized_train_data_path = os.path.join(featurized_data_dir_path, artifacts["FEATURIZED_OUT_TRAIN"])
     featurized_test_data_path  = os.path.join(featurized_data_dir_path, artifacts["FEATURIZED_OUT_TEST"])
 
-    max_feature = params["featurize"]["max_feature"]
+    max_features = params["featurize"]["max_feature"]
     ngrams = params["featurize"]["ngrams"]
-
+    
     df_train = get_df(train_data_path)
 
     train_words = np.array(df_train.text.str.lower().values.astype("U"))
-    print(train_words[:2])
+    
+    bag_of_words = CountVectorizer(
+        stop_words = 'english',
+        max_features = max_features,
+        ngram_range= (1, ngrams)
+        )
+    bag_of_words.fit(train_words)
+    
+    train_words_binary_matrix = bag_of_words.transform(train_words)
+    # print(f"bag of words are {train_words_binary_matrix.toarray()}")
+
+    tfidf = TfidfVectorizer(smooth_idf= False)
+    tfidf.fit(train_words_binary_matrix)
+    train_words_tfidf_matrix = tfidf.transform(train_words_binary_matrix)
+
+    save_matrix(df_train, train_words_binary_matrix, featurized_train_data_path)
+
 
 
 
