@@ -13,7 +13,7 @@ logging.basicConfig(
     filemode="a"
     )
 
-def main(config_path):
+def main(config_path, params_path):
     pass
 
 if __name__ == '__main__':
@@ -25,7 +25,7 @@ if __name__ == '__main__':
     try:
         logging.info("\n********************")
         logging.info(">>>>> stage {STAGE} started <<<<<")
-        main(config_path=parsed_args.config, param_path= params.yaml)
+        main(config_path=parsed_args.config, params_path= parsed_args.params)
         logging.info(">>>>> stage {STAGE} completed! all the data are saved in local <<<<<n")
     except Exception as e:
         logging.exception(e)
