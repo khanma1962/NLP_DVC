@@ -1,20 +1,20 @@
 schema: '2.0'
 stages:
   prepare_data:
-    cmd: python src/stage_01_prepare.py
+    cmd: python src/stage_01_prepare.py --config=configs/config.yaml --params=params.yaml
     deps:
     - path: configs/config.yaml
-      md5: a5d6039dbfb02769ece5ef457bf1fd6a
-      size: 223
+      md5: d55bdf99470c35d5445f2c4cb436af9e
+      size: 316
     - path: data/data.xml
       md5: a304afb96060aad90176268345e10355
       size: 37891850
     - path: src/stage_01_prepare.py
-      md5: e1f4ca270a9a8477a2e0858950f4de7d
-      size: 2076
+      md5: 7cf0c3d286d462e726cf3526ef2711f6
+      size: 2140
     - path: src/utils/common.py
-      md5: ca5f9c64351ad97e08e9bdd37c322bbe
-      size: 426
+      md5: 94fe03c02906cd504008a073cd995e71
+      size: 778
     - path: src/utils/data_management.py
       md5: f559693633884ca2d3762af708466e59
       size: 905
@@ -29,3 +29,35 @@ stages:
     - path: artifacts/prepared/train.tsv
       md5: 553034c4cf40efc63c99c19fe98610d0
       size: 18966620
+  featurize:
+    cmd: python src/stage_02_featurization.py --config=configs/config.yaml --params=params.yaml
+    deps:
+    - path: artifacts/prepared/test.tsv
+      md5: 60c757f3b30604473de7fa775dfc00d9
+      size: 4894699
+    - path: artifacts/prepared/train.tsv
+      md5: 553034c4cf40efc63c99c19fe98610d0
+      size: 18966620
+    - path: configs/config.yaml
+      md5: d55bdf99470c35d5445f2c4cb436af9e
+      size: 316
+    - path: src/stage_02_featurization.py
+      md5: 5688103e8edaeb99268b5098ff2be35a
+      size: 3095
+    - path: src/utils/common.py
+      md5: 94fe03c02906cd504008a073cd995e71
+      size: 778
+    - path: src/utils/featurize.py
+      md5: 48833a08fe8b1072d6a0ef9e3d921f38
+      size: 505
+    params:
+      params.yaml:
+        featurize.max_feature: 3000
+        featurize.ngrams: 3
+    outs:
+    - path: artifacts/features/test.pkl
+      md5: 71455a41de7c1d29491a67f656e9e8d1
+      size: 2744009
+    - path: artifacts/features/train.pkl
+      md5: a16e6aa1e0f548317e3b7efb5428ebf8
+      size: 10684353
