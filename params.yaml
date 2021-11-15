@@ -6,3 +6,9 @@ prepare:
 featurize:
   ngrams: 3
   max_feature: 3000
+
+train:
+  seed: 42
+  n_est: 100
+  min_split: 16
+
