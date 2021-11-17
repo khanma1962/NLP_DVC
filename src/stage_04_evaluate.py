@@ -73,6 +73,14 @@ def main(config_path):
 
     fpr, tpr, roc_threshold = metrics.roc_curve(labels, predcitions)
 
+    roc_data = {
+        "roc" : [
+            {"fpr": fpr, "tpr": tpr, "roc_threshold": t} 
+            for fpr, tpr, t in zip(fpr, tpr, roc_threshold)
+            ]
+    }
+
+    save_json(ROC_json_path, roc_data)
 
 
 
