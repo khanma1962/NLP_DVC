@@ -21,10 +21,10 @@ jobs:
 
         run: |
           cml-runner \
-          -- cloud aws \
-          -- cloud-region us-west \
-          -- cloud-type=m \ # t2.micro or m
-          -- labels= cml-runner
+          --cloud aws \
+          --cloud-region us-west \
+          --cloud-type=m \
+          --labels=cml-runner
 
 
   model-training:
