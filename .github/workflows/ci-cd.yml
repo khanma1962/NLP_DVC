@@ -22,7 +22,7 @@ jobs:
           cml-runner \
           -- cloud aws \
           -- cloud_region us_east \
-          -- cloud-type=t2.micro \ # t2.micro or m
+          -- cloud-type=m \ # t2.micro or m
           -- labels= cml-runner
 
 
