@@ -32,7 +32,7 @@ jobs:
           echo "## METRICS" >> report.md
           cat score.json >> report.md
 
-          cml-send-comment report.mld ## CML COMMAND USE TO COMMENT ON LAST COMMAND
+          cml-send-comment report.md ## CML COMMAND USE TO COMMENT ON LAST COMMAND
 
 
 
