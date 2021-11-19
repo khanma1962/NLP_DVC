@@ -38,7 +38,7 @@ def main(config_path, params_path):
     
     df_train = get_df(train_data_path)
 
-    train_words = np.array(df_train.text.str.lower().values.astype("U1000")) # for smalle U1000 or U
+    train_words = np.array(df_train.text.str.lower().values.astype("U")) # for smalle U1000 or U
     
     bag_of_words = CountVectorizer(
         stop_words = 'english',
