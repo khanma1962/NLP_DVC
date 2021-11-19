@@ -8,6 +8,7 @@ on: [push]
 
 jobs:
   deploy-runner:
+    runs-on: [ubuntu-latest]
     steps:
       - uses: iterative/setup-cml@v1
       - uses: actions/checkout@v2
